@@ -1,0 +1,250 @@
+Você já possui a maior parte do sistema pronta e funcionando no Render. Agora quero que finalize profissionalmente o projeto com base no PDF de arquitetura anexado. 
+
+OBJETIVO:
+Transformar o sistema em uma plataforma premium completa de:
+
+* Agendamento de passeios e transfers
+* CRM Omnichannel com IA
+* Painel administrativo profissional
+* Área do cliente
+* Interface moderna e realista
+* Dados reais da Vila do Junco
+
+IMPORTANTE:
+Use informações REAIS, imagens REAIS e conteúdos REAIS destes sites:
+
+* [Vila do Junco Turismo](https://www.viladojuncotur.com.br?utm_source=chatgpt.com)
+* [Vila do Junco Oficial](https://www.viladojunco.com/?utm_source=chatgpt.com)
+
+PEGUE AUTOMATICAMENTE:
+
+* fotos reais
+* nome dos passeios
+* descrições
+* preços se disponíveis
+* transfers
+* informações da pousada
+* contatos
+* localização
+* identidade visual
+* paleta de cores
+* estilo do site
+
+NÃO usar dados fake ou lorem ipsum.
+
+====================================
+O QUE FALTA IMPLEMENTAR
+=======================
+
+1. HOME PAGE PREMIUM
+
+* Hero section profissional com vídeo/imagem real
+* Banner moderno
+* Seção de passeios em destaque
+* Seção de transfers
+* Galeria real
+* Depoimentos
+* FAQ
+* CTA de agendamento
+* Layout extremamente moderno e turístico
+* Mobile first
+* SEO otimizado
+
+2. SISTEMA DE AGENDAMENTO
+   Implementar completamente:
+
+* seleção de passeio
+* seleção de transfer
+* calendário
+* quantidade de pessoas
+* horários
+* status da reserva
+* confirmação
+* resumo da reserva
+* painel administrativo de reservas
+* histórico do cliente
+
+3. ÁREA DO CLIENTE
+   Criar:
+
+* login
+* cadastro
+* histórico de reservas
+* status do pedido
+* edição de perfil
+* painel elegante
+
+4. PAINEL ADMINISTRATIVO
+   Criar/admin:
+
+* dashboard moderno
+* gestão de passeios
+* gestão de transfers
+* gestão de reservas
+* gestão de clientes
+* calendário visual
+* métricas
+* relatórios
+* controle interno
+* área administrativa oculta para clientes
+
+5. CRM OMNICHANNEL
+   Com base no PDF:
+
+* inbox estilo WhatsApp/ZapBR
+* múltiplos atendentes
+* mensagens rápidas
+* tags
+* notas internas
+* contatos
+* funil
+* histórico
+* painel de atendimento
+* central de conversas
+
+6. IA DO CRM
+   Implementar:
+
+* respostas automáticas
+* base de conhecimento
+* prompts editáveis
+* transbordo humano
+* treinamento da IA
+* contexto das conversas
+* painel para editar comportamento da IA
+
+7. AUTOMAÇÕES
+   Criar:
+
+* mensagens automáticas
+* ausência
+* boas-vindas
+* confirmação de reserva
+* qualificação de leads
+* fluxos automatizados
+
+8. BANCO DE DADOS
+   Validar e completar:
+
+* Prisma
+* PostgreSQL
+* relacionamentos
+* tabelas do PDF
+* customers
+* tours
+* transfers
+* bookings
+* contacts
+* conversations
+* messages
+* tags
+* users
+* permissions
+
+9. VISUAL / UX
+   O sistema deve parecer:
+
+* startup premium
+* turismo de luxo
+* moderno
+* intuitivo
+* altamente profissional
+
+Usar:
+
+* animações suaves
+* microinterações
+* shadcn/ui
+* Tailwind
+* visual clean
+* cards modernos
+* dark/light mode elegante
+* loading states
+* skeletons
+* transições
+
+10. RESPONSIVIDADE
+    Garantir:
+
+* mobile perfeito
+* tablet
+* desktop
+* performance otimizada
+
+11. SEGURANÇA
+    Implementar:
+
+* autenticação JWT
+* RBAC
+* proteção de rotas
+* validações
+* proteção básica contra ataques
+
+12. FINALIZAÇÃO
+
+* corrigir bugs restantes
+* remover mocks desnecessários
+* otimizar build
+* revisar rotas
+* revisar APIs
+* revisar banco
+* revisar deploy Render
+* revisar frontend
+* revisar backend
+
+====================================
+STACK OBRIGATÓRIA
+=================
+
+Frontend:
+
+* Next.js
+* React
+* TypeScript
+* Tailwind
+* shadcn/ui
+
+Backend:
+
+* Node.js
+* Express/NestJS
+* Prisma
+* PostgreSQL
+
+Integrações:
+
+* OpenAI
+* WhatsApp
+* Meta API
+* Mercado Pago ou Stripe
+
+====================================
+IMPORTANTE
+==========
+
+* NÃO quebrar o deploy atual do Render
+* NÃO remover funcionalidades já prontas
+* MANTER compatibilidade com PostgreSQL
+* MANTER compatibilidade com Render
+* MANTER arquitetura existente
+* Fazer tudo profissionalmente
+* Criar estrutura escalável
+* Criar código limpo e organizado
+
+Após finalizar:
+
+1. Faça commit automaticamente
+2. Faça push para GitHub
+3. Informe exatamente:
+
+   * build command
+   * start command
+   * variáveis de ambiente necessárias
+   * rotas principais
+   * acessos admin
+   * como rodar localmente
+4. Gere seed inicial com dados reais da Vila do Junco
+5. Use imagens reais automaticamente dos sites informados
+6. Preencha o sistema com conteúdo real automaticamente
+
+O sistema deve ficar pronto para apresentação ao cliente e parecer um software SaaS profissional completo.

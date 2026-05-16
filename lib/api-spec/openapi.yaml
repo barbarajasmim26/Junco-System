@@ -3,20 +3,30 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Vila do Junco - Sistema de Agendamento e CRM
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
-    description: Health operations
+  - name: tours
+  - name: transfers
+  - name: bookings
+  - name: customers
+  - name: gallery
+  - name: faqs
+  - name: leads
+  - name: conversations
+  - name: knowledge
+  - name: stats
+  - name: settings
+
 paths:
   /healthz:
     get:
       operationId: healthCheck
       tags: [health]
       summary: Health check
-      description: Returns server health status
       responses:
         "200":
           description: Healthy
@@ -24,6 +34,804 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /tours:
+    get:
+      operationId: listTours
+      tags: [tours]
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+        - name: active
+          in: query
+          schema:
+            type: boolean
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Tour"
+    post:
+      operationId: createTour
+      tags: [tours]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TourInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+
+  /tours/{id}:
+    get:
+      operationId: getTour
+      tags: [tours]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+        "404":
+          description: Not Found
+    patch:
+      operationId: updateTour
+      tags: [tours]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TourUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tour"
+    delete:
+      operationId: deleteTour
+      tags: [tours]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /transfers:
+    get:
+      operationId: listTransfers
+      tags: [transfers]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Transfer"
+    post:
+      operationId: createTransfer
+      tags: [transfers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+
+  /transfers/{id}:
+    get:
+      operationId: getTransfer
+      tags: [transfers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+    patch:
+      operationId: updateTransfer
+      tags: [transfers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TransferUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Transfer"
+    delete:
+      operationId: deleteTransfer
+      tags: [transfers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /bookings:
+    get:
+      operationId: listBookings
+      tags: [bookings]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: dateFrom
+          in: query
+          schema:
+            type: string
+        - name: dateTo
+          in: query
+          schema:
+            type: string
+        - name: customerId
+          in: query
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Booking"
+    post:
+      operationId: createBooking
+      tags: [bookings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+
+  /bookings/{id}:
+    get:
+      operationId: getBooking
+      tags: [bookings]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+    patch:
+      operationId: updateBooking
+      tags: [bookings]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BookingUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Booking"
+    delete:
+      operationId: deleteBooking
+      tags: [bookings]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /availability:
+    get:
+      operationId: getAvailability
+      tags: [bookings]
+      parameters:
+        - name: year
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: integer
+        - name: itemId
+          in: query
+          schema:
+            type: integer
+        - name: itemType
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/AvailabilityDay"
+
+  /customers:
+    get:
+      operationId: listCustomers
+      tags: [customers]
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Customer"
+    post:
+      operationId: createCustomer
+      tags: [customers]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+
+  /customers/{id}:
+    get:
+      operationId: getCustomer
+      tags: [customers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+    patch:
+      operationId: updateCustomer
+      tags: [customers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CustomerUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Customer"
+    delete:
+      operationId: deleteCustomer
+      tags: [customers]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /gallery:
+    get:
+      operationId: listGallery
+      tags: [gallery]
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GalleryImage"
+    post:
+      operationId: createGalleryImage
+      tags: [gallery]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/GalleryImageInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GalleryImage"
+
+  /gallery/{id}:
+    delete:
+      operationId: deleteGalleryImage
+      tags: [gallery]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /faqs:
+    get:
+      operationId: listFaqs
+      tags: [faqs]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Faq"
+    post:
+      operationId: createFaq
+      tags: [faqs]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FaqInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Faq"
+
+  /faqs/{id}:
+    patch:
+      operationId: updateFaq
+      tags: [faqs]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FaqUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Faq"
+    delete:
+      operationId: deleteFaq
+      tags: [faqs]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /leads:
+    get:
+      operationId: listLeads
+      tags: [leads]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Lead"
+    post:
+      operationId: createLead
+      tags: [leads]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /leads/{id}:
+    patch:
+      operationId: updateLead
+      tags: [leads]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Lead"
+
+  /conversations:
+    get:
+      operationId: listConversations
+      tags: [conversations]
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: channel
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Conversation"
+    post:
+      operationId: createConversation
+      tags: [conversations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ConversationInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Conversation"
+
+  /conversations/{id}:
+    get:
+      operationId: getConversation
+      tags: [conversations]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConversationDetail"
+
+  /conversations/{id}/messages:
+    post:
+      operationId: addMessage
+      tags: [conversations]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MessageInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+
+  /ai/chat:
+    post:
+      operationId: aiChat
+      tags: [conversations]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AiChatInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AiChatResult"
+
+  /knowledge:
+    get:
+      operationId: listKnowledge
+      tags: [knowledge]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/KnowledgeEntry"
+    post:
+      operationId: createKnowledge
+      tags: [knowledge]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KnowledgeInput"
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeEntry"
+
+  /knowledge/{id}:
+    patch:
+      operationId: updateKnowledge
+      tags: [knowledge]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/KnowledgeUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/KnowledgeEntry"
+    delete:
+      operationId: deleteKnowledge
+      tags: [knowledge]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Deleted
+
+  /stats/dashboard:
+    get:
+      operationId: getDashboardStats
+      tags: [stats]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DashboardStats"
+
+  /settings:
+    get:
+      operationId: getSettings
+      tags: [settings]
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+    patch:
+      operationId: updateSettings
+      tags: [settings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettingsUpdate"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Settings"
+
+  /admin/login:
+    post:
+      operationId: adminLogin
+      tags: [settings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminLoginInput"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminLoginResult"
+        "401":
+          description: Unauthorized
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +842,908 @@ components:
       required:
         - status
 
+    Tour:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        duration:
+          type: string
+        price:
+          type: number
+        maxPeople:
+          type: integer
+        category:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        images:
+          type: array
+          items:
+            type: string
+        highlights:
+          type: array
+          items:
+            type: string
+        included:
+          type: array
+          items:
+            type: string
+        meetingPoint:
+          type: ["string", "null"]
+        active:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - duration
+        - price
+        - maxPeople
+        - category
+        - active
+        - createdAt
+        - images
+        - highlights
+        - included
+
+    TourInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        duration:
+          type: string
+        price:
+          type: number
+        maxPeople:
+          type: integer
+        category:
+          type: string
+        imageUrl:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        highlights:
+          type: array
+          items:
+            type: string
+        included:
+          type: array
+          items:
+            type: string
+        meetingPoint:
+          type: string
+        active:
+          type: boolean
+      required:
+        - name
+        - description
+        - duration
+        - price
+        - maxPeople
+        - category
+
+    TourUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        duration:
+          type: string
+        price:
+          type: number
+        maxPeople:
+          type: integer
+        category:
+          type: string
+        imageUrl:
+          type: string
+        images:
+          type: array
+          items:
+            type: string
+        highlights:
+          type: array
+          items:
+            type: string
+        included:
+          type: array
+          items:
+            type: string
+        meetingPoint:
+          type: string
+        active:
+          type: boolean
+
+    Transfer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        description:
+          type: string
+        origin:
+          type: string
+        destination:
+          type: string
+        price:
+          type: number
+        pricePerPerson:
+          type: boolean
+        maxPeople:
+          type: integer
+        duration:
+          type: string
+        imageUrl:
+          type: ["string", "null"]
+        vehicleType:
+          type: string
+        active:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - origin
+        - destination
+        - price
+        - pricePerPerson
+        - maxPeople
+        - duration
+        - vehicleType
+        - active
+        - createdAt
+
+    TransferInput:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        origin:
+          type: string
+        destination:
+          type: string
+        price:
+          type: number
+        pricePerPerson:
+          type: boolean
+        maxPeople:
+          type: integer
+        duration:
+          type: string
+        imageUrl:
+          type: string
+        vehicleType:
+          type: string
+        active:
+          type: boolean
+      required:
+        - name
+        - description
+        - origin
+        - destination
+        - price
+        - maxPeople
+        - duration
+        - vehicleType
+
+    TransferUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        origin:
+          type: string
+        destination:
+          type: string
+        price:
+          type: number
+        pricePerPerson:
+          type: boolean
+        maxPeople:
+          type: integer
+        duration:
+          type: string
+        imageUrl:
+          type: string
+        vehicleType:
+          type: string
+        active:
+          type: boolean
+
+    Booking:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: string
+        itemId:
+          type: integer
+        itemName:
+          type: string
+        customerId:
+          type: ["integer", "null"]
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        customerPhone:
+          type: string
+        date:
+          type: string
+        time:
+          type: ["string", "null"]
+        people:
+          type: integer
+        totalPrice:
+          type: number
+        status:
+          type: string
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - type
+        - itemId
+        - itemName
+        - customerName
+        - customerEmail
+        - customerPhone
+        - date
+        - people
+        - totalPrice
+        - status
+        - createdAt
+
+    BookingInput:
+      type: object
+      properties:
+        type:
+          type: string
+        itemId:
+          type: integer
+        customerId:
+          type: integer
+        customerName:
+          type: string
+        customerEmail:
+          type: string
+        customerPhone:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        people:
+          type: integer
+        totalPrice:
+          type: number
+        status:
+          type: string
+        notes:
+          type: string
+      required:
+        - type
+        - itemId
+        - customerName
+        - customerEmail
+        - customerPhone
+        - date
+        - people
+        - totalPrice
+
+    BookingUpdate:
+      type: object
+      properties:
+        status:
+          type: string
+        date:
+          type: string
+        time:
+          type: string
+        people:
+          type: integer
+        notes:
+          type: string
+
+    AvailabilityDay:
+      type: object
+      properties:
+        date:
+          type: string
+        bookingsCount:
+          type: integer
+        available:
+          type: boolean
+      required:
+        - date
+        - bookingsCount
+        - available
+
+    Customer:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        cpf:
+          type: ["string", "null"]
+        birthDate:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        city:
+          type: ["string", "null"]
+        state:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - email
+        - createdAt
+
+    CustomerInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        cpf:
+          type: string
+        birthDate:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        notes:
+          type: string
+      required:
+        - name
+        - email
+
+    CustomerUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        cpf:
+          type: string
+        birthDate:
+          type: string
+        address:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        notes:
+          type: string
+
+    GalleryImage:
+      type: object
+      properties:
+        id:
+          type: integer
+        url:
+          type: string
+        title:
+          type: ["string", "null"]
+        category:
+          type: ["string", "null"]
+        order:
+          type: integer
+        createdAt:
+          type: string
+      required:
+        - id
+        - url
+        - order
+        - createdAt
+
+    GalleryImageInput:
+      type: object
+      properties:
+        url:
+          type: string
+        title:
+          type: string
+        category:
+          type: string
+        order:
+          type: integer
+      required:
+        - url
+
+    Faq:
+      type: object
+      properties:
+        id:
+          type: integer
+        question:
+          type: string
+        answer:
+          type: string
+        order:
+          type: integer
+        active:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - question
+        - answer
+        - order
+        - active
+        - createdAt
+
+    FaqInput:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        order:
+          type: integer
+        active:
+          type: boolean
+      required:
+        - question
+        - answer
+
+    FaqUpdate:
+      type: object
+      properties:
+        question:
+          type: string
+        answer:
+          type: string
+        order:
+          type: integer
+        active:
+          type: boolean
+
+    Lead:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: ["string", "null"]
+        source:
+          type: ["string", "null"]
+        status:
+          type: string
+        interest:
+          type: ["string", "null"]
+        notes:
+          type: ["string", "null"]
+        createdAt:
+          type: string
+      required:
+        - id
+        - name
+        - email
+        - status
+        - createdAt
+
+    LeadInput:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+        interest:
+          type: string
+        notes:
+          type: string
+      required:
+        - name
+        - email
+
+    LeadUpdate:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        source:
+          type: string
+        status:
+          type: string
+        interest:
+          type: string
+        notes:
+          type: string
+
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+        contactName:
+          type: string
+        contactPhone:
+          type: ["string", "null"]
+        contactEmail:
+          type: ["string", "null"]
+        channel:
+          type: string
+        status:
+          type: string
+        lastMessage:
+          type: ["string", "null"]
+        unreadCount:
+          type: integer
+        assignedTo:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - contactName
+        - channel
+        - status
+        - unreadCount
+        - tags
+        - createdAt
+        - updatedAt
+
+    ConversationInput:
+      type: object
+      properties:
+        contactName:
+          type: string
+        contactPhone:
+          type: string
+        contactEmail:
+          type: string
+        channel:
+          type: string
+        status:
+          type: string
+        assignedTo:
+          type: string
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - contactName
+        - channel
+
+    ConversationDetail:
+      type: object
+      properties:
+        id:
+          type: integer
+        contactName:
+          type: string
+        contactPhone:
+          type: ["string", "null"]
+        contactEmail:
+          type: ["string", "null"]
+        channel:
+          type: string
+        status:
+          type: string
+        assignedTo:
+          type: ["string", "null"]
+        tags:
+          type: array
+          items:
+            type: string
+        messages:
+          type: array
+          items:
+            $ref: "#/components/schemas/Message"
+        createdAt:
+          type: string
+        updatedAt:
+          type: string
+      required:
+        - id
+        - contactName
+        - channel
+        - status
+        - tags
+        - messages
+        - createdAt
+        - updatedAt
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        conversationId:
+          type: integer
+        content:
+          type: string
+        sender:
+          type: string
+        isAi:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - conversationId
+        - content
+        - sender
+        - isAi
+        - createdAt
+
+    MessageInput:
+      type: object
+      properties:
+        content:
+          type: string
+        sender:
+          type: string
+        isAi:
+          type: boolean
+      required:
+        - content
+        - sender
+
+    AiChatInput:
+      type: object
+      properties:
+        conversationId:
+          type: integer
+        message:
+          type: string
+      required:
+        - message
+
+    AiChatResult:
+      type: object
+      properties:
+        reply:
+          type: string
+        conversationId:
+          type: ["integer", "null"]
+      required:
+        - reply
+
+    KnowledgeEntry:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: ["string", "null"]
+        active:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - title
+        - content
+        - active
+        - createdAt
+
+    KnowledgeInput:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        active:
+          type: boolean
+      required:
+        - title
+        - content
+
+    KnowledgeUpdate:
+      type: object
+      properties:
+        title:
+          type: string
+        content:
+          type: string
+        category:
+          type: string
+        active:
+          type: boolean
+
+    DashboardStats:
+      type: object
+      properties:
+        totalBookings:
+          type: integer
+        pendingBookings:
+          type: integer
+        confirmedBookings:
+          type: integer
+        totalRevenue:
+          type: number
+        totalCustomers:
+          type: integer
+        activeConversations:
+          type: integer
+        recentBookings:
+          type: array
+          items:
+            $ref: "#/components/schemas/Booking"
+        bookingsByStatus:
+          type: object
+          additionalProperties:
+            type: integer
+        revenueByMonth:
+          type: array
+          items:
+            $ref: "#/components/schemas/MonthlyRevenue"
+      required:
+        - totalBookings
+        - pendingBookings
+        - confirmedBookings
+        - totalRevenue
+        - totalCustomers
+        - activeConversations
+        - recentBookings
+        - bookingsByStatus
+        - revenueByMonth
+
+    MonthlyRevenue:
+      type: object
+      properties:
+        month:
+          type: string
+        revenue:
+          type: number
+        bookings:
+          type: integer
+      required:
+        - month
+        - revenue
+        - bookings
+
+    Settings:
+      type: object
+      properties:
+        id:
+          type: integer
+        businessName:
+          type: string
+        phone:
+          type: ["string", "null"]
+        email:
+          type: ["string", "null"]
+        address:
+          type: ["string", "null"]
+        whatsapp:
+          type: ["string", "null"]
+        instagram:
+          type: ["string", "null"]
+        facebook:
+          type: ["string", "null"]
+        aiEnabled:
+          type: boolean
+        aiPrompt:
+          type: ["string", "null"]
+        adminPassword:
+          type: ["string", "null"]
+        updatedAt:
+          type: string
+      required:
+        - id
+        - businessName
+        - aiEnabled
+        - updatedAt
+
+    SettingsUpdate:
+      type: object
+      properties:
+        businessName:
+          type: string
+        phone:
+          type: string
+        email:
+          type: string
+        address:
+          type: string
+        whatsapp:
+          type: string
+        instagram:
+          type: string
+        facebook:
+          type: string
+        aiEnabled:
+          type: boolean
+        aiPrompt:
+          type: string
+        adminPassword:
+          type: string
+
+    AdminLoginInput:
+      type: object
+      properties:
+        password:
+          type: string
+      required:
+        - password
+
+    AdminLoginResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+      required:
+        - success
+        - token
